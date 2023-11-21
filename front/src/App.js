@@ -19,14 +19,7 @@ const App = () => {
       <BrowserRouter>
         <header className="header">
           <h1>Tetris</h1>
-          <div className="headerComputer">
-            <ul className="menu">
-              <li><NavLink to={`/account`}>Account</NavLink></li>
-              <li><NavLink to={`/logout`}>Logout</NavLink></li>
-            </ul>
-          </div>
         </header>
-
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
