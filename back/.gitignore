@@ -10,7 +10,7 @@
 
 # production
 /build
-config.js
+config.json
 package-lock.json
 
 # misc
