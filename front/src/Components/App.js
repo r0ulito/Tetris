@@ -1,5 +1,5 @@
 import React from 'react';
-import Tetris from './Components/Tetris';
+import Tetris from './Tetris';
 
 function App() {
   return (
