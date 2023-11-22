@@ -11,7 +11,7 @@ const LoginPage = () => {
 
     return (
         <section className='login'>
-            <div className='login-container'>
+            <div>
                 <article>
                     <form>
                         <label>Email:</label>
