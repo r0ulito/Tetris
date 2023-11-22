@@ -1,6 +1,6 @@
 # Tetris 1v1
 
-![Tetris Logo](tetris_logo.png)
+![Tetris Logo](tetris-logo.png)
 
 ## Overview
 
