@@ -3,8 +3,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const bodyParser = require('koa-bodyparser');
 const koaJwt = require('koa-jwt');
-const config = require('./back/config');
-const authRoutes = require('./back/auth');
+const config = require('./config');
+const authRoutes = require('./auth');
 const generalRoutes = require('./routes');
 const setupWebSocket = require('./websocket');
 

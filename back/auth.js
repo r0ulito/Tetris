@@ -1,7 +1,7 @@
 const router = require('koa-router')();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { pool, getUserByUsername } = require('../database');
+const { pool, getUserByUsername } = require('./database');
 const config = require('./config');
 
 // Routes d'inscription et de connexion
