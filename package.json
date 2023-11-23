@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall" : "cross-env-shell \"husky install && cd ./front && npm i && cd ../back && npm i\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:back": "cd back && node server.js",
-    "start:front": "cd front && npm run start",
-    "start": "concurrently \"npm run start:*\"",
+    "dev-back": "cd ./back && node server.js",
+    "dev-front": "cd ./front && npm start",
+    "dev": "concurrently \"npm run dev-*\"",
     "prepare": "husky install",
     "lint" : "lint-staged"
   },
-  "keywords": [],
+  "keywords": ["game", "tetris", "fun"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
