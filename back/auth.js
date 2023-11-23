@@ -28,6 +28,7 @@ router.post("/signup", async (ctx) => {
     const isEmailTaken = existingUser.rows.some(
       (row) => row.user_email === email,
     );
+
     let errorMessage = "Erreur : ";
     if (isUsernameTaken) {
       errorMessage += "Nom d'utilisateur déjà utilisé. ";
@@ -36,10 +37,9 @@ router.post("/signup", async (ctx) => {
       errorMessage += "E-mail déjà utilisé.";
     }
 
-    // Lancer une erreur personnalisée
-    const error = new Error(errorMessage);
-    // error.status = 400;
-    throw error;
+    ctx.status = 400;
+    ctx.body = { message: errorMessage };
+    return;
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
