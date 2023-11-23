@@ -3,6 +3,7 @@ import http from "http";
 import bodyParser from "koa-bodyparser";
 import koaJwt from "koa-jwt";
 import fs from "fs";
+import corsMiddleware from "./middleware.js";
 import authRoutes from "./auth.js";
 import generalRoutes from "./routes.js";
 import setupWebSocket from "./websocket.js";
@@ -20,6 +21,7 @@ import("socket.io").then((socketIoModule) => {
   const io = new socketIoModule.Server();
   io.attach(server);
 
+  app.use(corsMiddleware);
   app.use(bodyParser());
   app.use(authRoutes.routes());
   app.use(generalRoutes.routes());
