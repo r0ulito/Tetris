@@ -82,4 +82,30 @@ router.post("/login", async (ctx) => {
   }
 });
 
+// Route pour récupérer les informations de l'utilisateur
+router.get("/userinfo", async (ctx) => {
+  try {
+    const userId = ctx.state.user.id; // l'ID de l'utilisateur est extrait du token JWT
+    const userResult = await pool.query(
+      "SELECT * FROM users WHERE user_id = $1",
+      [userId],
+    );
+    const user = userResult.rows[0];
+
+    if (user) {
+      ctx.body = {
+        username: user.user_name,
+        email: user.user_email,
+        password: user.hashed_password,
+      };
+    } else {
+      ctx.status = 404;
+      ctx.body = { message: "Utilisateur non trouvé" };
+    }
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { message: "Erreur de serveur" };
+  }
+});
+
 export default router;
