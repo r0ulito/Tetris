@@ -25,24 +25,24 @@ app.use(async (ctx, next) => {
     console.error("Erreur capturée: ", err.message);
   }
 });
+app.use(corsMiddleware);
+app.use(bodyParser());
+app.use(
+  koaJwt({ secret: config.jwt_secret }).unless({
+    path: [/^\/public/, /^\/login/, /^\/signup/],
+  }),
+);
+app.use(authRoutes.routes());
+app.use(generalRoutes.routes());
+
+// Export l'instance de l'application Koa
+export default app;
 
 // Importation dynamique de socket.io
 import("socket.io").then((socketIoModule) => {
   // Création de l'instance socket.io en utilisant .attach()
   const io = new socketIoModule.Server();
   io.attach(server);
-
-  // Ajout des autres middlewares
-  app.use(corsMiddleware);
-  app.use(bodyParser());
-  app.use(
-    koaJwt({ secret: config.jwt_secret }).unless({
-      path: [/^\/public/, /^\/login/, /^\/signup/],
-    }),
-  );
-  app.use(authRoutes.routes());
-  app.use(generalRoutes.routes());
-
   setupWebSocket(io);
 
   const PORT = 8180;
