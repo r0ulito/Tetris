@@ -1,6 +1,6 @@
-const io = require("socket.io-client");
+import { io as clientIo } from "socket.io-client";
 
-const socket = io("http://localhost:8180");
+const socket = clientIo("http://localhost:8180");
 
 socket.on("connect", () => {
   console.log("Connecté au serveur");

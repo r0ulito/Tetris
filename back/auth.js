@@ -2,52 +2,73 @@
 import Router from "koa-router";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import fs from "fs";
 import { pool } from "./database.js";
+
+// Importation de la configuration
+const rawConfig = fs.readFileSync(new URL("./config.json", import.meta.url));
+const config = JSON.parse(rawConfig);
 
 const router = new Router();
 
 // Routes d'inscription et de connexion
 router.post("/signup", async (ctx) => {
-  const { username, password } = ctx.request.body;
-  console.log(username, password);
+  const { username, password, email } = ctx.request.body;
 
-  // Vérifi si l'utilisateur existe déjà
+  // Vérifier si le nom d'utilisateur ou l'e-mail existe déjà
   const existingUser = await pool.query(
-    "SELECT * FROM users WHERE user_name = $1",
-    [username],
+    "SELECT * FROM users WHERE user_name = $1 OR user_email = $2",
+    [username, email],
   );
+
   if (existingUser.rows.length) {
-    ctx.status = 400;
-    ctx.body = { message: "Nom d'utilisateur déjà pris" };
-    return;
+    const isUsernameTaken = existingUser.rows.some(
+      (row) => row.user_name === username,
+    );
+    const isEmailTaken = existingUser.rows.some(
+      (row) => row.user_email === email,
+    );
+    let errorMessage = "Erreur : ";
+    if (isUsernameTaken) {
+      errorMessage += "Nom d'utilisateur déjà utilisé. ";
+    }
+    if (isEmailTaken) {
+      errorMessage += "E-mail déjà utilisé.";
+    }
+
+    // Lancer une erreur personnalisée
+    const error = new Error(errorMessage);
+    // error.status = 400;
+    throw error;
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
     await pool.query(
-      "INSERT INTO users (user_name, hashed_password) VALUES ($1, $2)",
-      [username, hashedPassword],
+      "INSERT INTO users (user_name, hashed_password, user_email) VALUES ($1, $2, $3)",
+      [username, hashedPassword, email],
     );
     ctx.body = { message: "Inscription réussie" };
   } catch (error) {
-    ctx.status = 500;
-    ctx.body = { message: "Erreur lors de l'inscription" };
+    const serverError = new Error("Erreur lors de l'inscription");
+    throw serverError;
   }
 });
 
 router.post("/login", async (ctx) => {
-  const { username, password } = ctx.request.body;
+  const { email, password } = ctx.request.body;
 
   try {
     const userResult = await pool.query(
-      "SELECT * FROM users WHERE user_name = $1",
-      [username],
+      "SELECT * FROM users WHERE user_email = $1",
+      [email],
     );
     const user = userResult.rows[0];
 
     if (user && (await bcrypt.compare(password, user.hashed_password))) {
-      const token = jwt.sign({ id: user.user_id }, process.env.JWT_SECRET, {
+      // Utiliser config.jwt_secret pour le JWT
+      const token = jwt.sign({ id: user.user_id }, config.jwt_secret, {
         expiresIn: "2h",
       });
       ctx.body = { message: "Connexion réussie", token };

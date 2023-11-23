@@ -15,21 +15,33 @@ const config = JSON.parse(rawConfig);
 const app = new Koa();
 const server = http.createServer(app.callback());
 
+// Middleware d'erreur global
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    ctx.status = err.status || 500;
+    ctx.body = { message: err.message };
+    console.error("Erreur capturée: ", err.message);
+  }
+});
+
 // Importation dynamique de socket.io
 import("socket.io").then((socketIoModule) => {
   // Création de l'instance socket.io en utilisant .attach()
   const io = new socketIoModule.Server();
   io.attach(server);
 
+  // Ajout des autres middlewares
   app.use(corsMiddleware);
   app.use(bodyParser());
-  app.use(authRoutes.routes());
-  app.use(generalRoutes.routes());
   app.use(
     koaJwt({ secret: config.jwt_secret }).unless({
       path: [/^\/public/, /^\/login/, /^\/signup/],
     }),
   );
+  app.use(authRoutes.routes());
+  app.use(generalRoutes.routes());
 
   setupWebSocket(io);
 
