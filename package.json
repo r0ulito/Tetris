@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:back": "cd back && npm run start",
+    "start:back": "cd back && node server.js",
     "start:front": "cd front && npm run start",
     "start": "concurrently \"npm run start:back\" \"npm run start:front\""
   },

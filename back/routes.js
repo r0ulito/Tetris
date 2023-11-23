@@ -1,9 +1,12 @@
-const router = require('koa-router')();
-const db = require('./database');
+// Importations ES module
+import Router from "koa-router";
+// import * as db from "./database";
+
+const router = new Router();
 
 // Route d'accueil
-router.get('/', async (ctx) => {
-    ctx.body = 'Bienvenue sur Tetris Online!';
+router.get("/", async (ctx) => {
+  ctx.body = "Bienvenue sur Tetris Online!";
 });
 
 // // Route pour obtenir des informations sur le jeu ou le statut du serveur
@@ -27,4 +30,4 @@ router.get('/', async (ctx) => {
 
 // Ajoutez d'autres routes selon les besoins de votre jeu
 
-module.exports = router;
+export default router;
