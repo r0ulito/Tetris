@@ -53,6 +53,9 @@ const LoginPage = () => {
                     <Link to="/register">
                         <button className="custom-btn btn btn-green">S'inscrire</button>
                     </Link>
+                    <Link to="/Tetris">
+                        <button className="custom-btn btn btn-green">test</button>
+                    </Link>
                 </article>
             </div>
         </section>

@@ -9,7 +9,7 @@
     "start:front": "cd front && npm run start",
     "start": "concurrently \"npm run start:*\"",
     "prepare": "husky install",
-    "lint" : "lint-staged"
+    "lint": "lint-staged"
   },
   "keywords": [],
   "author": "",
