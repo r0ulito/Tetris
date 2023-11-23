@@ -9,6 +9,7 @@ const router = new Router();
 // Routes d'inscription et de connexion
 router.post("/signup", async (ctx) => {
   const { username, password } = ctx.request.body;
+  console.log(username, password);
 
   // Vérifi si l'utilisateur existe déjà
   const existingUser = await pool.query(
