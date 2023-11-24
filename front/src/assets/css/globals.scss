@@ -100,7 +100,45 @@ section.register {
     }
   }
 }
+/* =============================================================================================================================================
+                                                                ACCOUNT
+============================================================================================================================================= */
+section.account {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  .accountData {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .titleAccount {
+    color: black;
+  }
+  div {
+    align-items: inherit;
+
+    article {
+      width: 100%;
+      background-color: white;
+      border-radius: 0.4rem;
+      justify-content: center;
+      margin-bottom: 1.5em;
+      padding: 1em 1em;
+      flex-direction: column;
+
+      div {
+        button {
+          margin: 0 1em;
+        }
+      }
+    }
+  }
+}
   
 
 /*__________________________________ Button ________________________________*/

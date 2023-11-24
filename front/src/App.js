@@ -1,10 +1,12 @@
-import { NavLink, Route, Routes, BrowserRouter } from 'react-router-dom';
+import { NavLink, Route, Routes, BrowserRouter} from 'react-router-dom';
 import Login from './views/Login';
 import Register from './views/Register';
 import TetrisView from './views/TetrisView';
 import './assets/css/globals.scss';
+import Account from './views/Account';
 
 const App = () => {
+
   return (
     <div>
       <header>
@@ -23,6 +25,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/Account' element={<Account />} />
           <Route path='/tetris' element={<TetrisView />} />
           <Route
             path='*'

@@ -1,13 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { getTokenFromLocalStorage } from '../lib/common';
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState("");
+    const token = getTokenFromLocalStorage();
+    const navigate = useNavigate();
 
+    const redirect = () => {
+        if (token) {
+            return navigate(`/account`)
+        }
+    }
+
+    useEffect(() => {
+        redirect()
+    }, []);
+    
     const userRegister = async (e) => {
         e.preventDefault();
         try {
@@ -26,7 +39,7 @@ const Register = () => {
             console.log(response)
         }
         catch (err) {
-            console.log('Some error occured during register in: ', err);
+            setErrorMessage(err.response.data.message);
         }
     };
 
