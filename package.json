@@ -29,7 +29,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "cd /c/dev/tetris-online-back/back && sh .git/hooks/pre-push"
+      "pre-push": "sh .husky/pre-push"
     }
+  },
+  "dependencies": {
+    "styled-components": "^6.1.1"
   }
 }
