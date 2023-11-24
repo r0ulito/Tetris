@@ -11,11 +11,9 @@ const Account = () => {
                 <div className="accountData">
                     <article>
                         <h3 className="titleAccount">Information Utilisateur</h3>
-                        <Link to="/updateUser">
-                            <button className="custom-btn btn btn-green">
-                                Modifier mes données
-                            </button>
-                        </Link>
+                        <button className="custom-btn btn btn-green">
+                            Modifier mes données
+                        </button>
                     </article>
                     <article>
                         <h3>Partie Solo</h3>
