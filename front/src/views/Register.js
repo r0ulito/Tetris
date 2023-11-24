@@ -47,7 +47,7 @@ const Register = () => {
         <section className='register'>
             <div>
                 <form onSubmit={userRegister}>
-                    <h2>Creer un compte</h2>
+                    <h2>Inscription</h2>
                     <div>
                         <label htmlFor="username">Votre Pseudo</label>
                         <input id="username" name="username" type="username" value={username} onChange={(e) => setUsername(e.target.value)} />

@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes, BrowserRouter} from 'react-router-dom';
+import { NavLink, Route, Routes, BrowserRouter } from 'react-router-dom';
 import Login from './views/Login';
 import Register from './views/Register';
 import TetrisView from './views/TetrisView';
@@ -20,7 +20,9 @@ const App = () => {
       </header>
       <BrowserRouter>
         <header className='header'>
-          <h1>Tetris</h1>
+          <NavLink to={`/`} className="logo-link">
+            <h1>Tetris</h1>
+          </NavLink>
         </header>
         <Routes>
           <Route path='/' element={<Login />} />
