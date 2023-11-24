@@ -2,7 +2,7 @@
    "*.(js|html|css)":[
       "prettier --write"
    ],
-   "*.js":[
+   "*.js": [
       "eslint --fix"
    ]
 }

@@ -4,20 +4,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall" : "cross-env-shell \"husky install && cd ./front && npm i && cd ../back && npm i\"",
+    "postinstall": "cross-env-shell \"husky install && cd ./front && npm i && cd ../back && npm i\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-back": "cd ./back && node server.js",
     "dev-front": "cd ./front && npm start",
     "dev": "concurrently \"npm run dev-*\"",
     "prepare": "husky install",
-    "lint": "lint-staged"
+    "lint": "lint-staged",
+    "pre-push-script": "git diff --name-only --cached | grep '^back/' && npm test || echo 'No back/ files changed, skipping tests'"
   },
-  "keywords": ["game", "tetris", "fun"],
+  "keywords": [
+    "game",
+    "tetris",
+    "fun"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "eslint": "^8.54.0",
     "husky": "^8.0.3",
-    "lint-staged": "^15.1.0"
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "cd /c/dev/tetris-online-back/back && sh .git/hooks/pre-push"
+    }
   }
 }
