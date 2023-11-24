@@ -36,6 +36,9 @@ const Register = () => {
           "Content-Type": "application/json",
         },
       });
+      if (response) {
+        return navigate(`/`);
+      }
       console.log(response);
     } catch (err) {
       setErrorMessage(err.response.data.message);
