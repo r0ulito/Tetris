@@ -20,7 +20,9 @@ const App = () => {
       <div className="app-body">
         <BrowserRouter>
           <header className="header">
-            <h1>The Tetris</h1>
+            <NavLink to={`/`} className="logo-link">
+              <h1>The Tetris</h1>
+            </NavLink>
           </header>
           <Routes>
             <Route path="/" element={<Login />} />
