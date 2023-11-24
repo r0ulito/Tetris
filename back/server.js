@@ -15,7 +15,7 @@ const config = JSON.parse(rawConfig);
 const app = new Koa();
 const server = http.createServer(app.callback());
 
-// Middleware d'erreur global
+// Middleware pour gerer les erreurs de maniere global
 app.use(async (ctx, next) => {
   try {
     await next();

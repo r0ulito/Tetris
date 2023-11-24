@@ -2,10 +2,12 @@
                                                                         VARIABLE
 ============================================================================================================================================= */
 $non: none;
-$colorTitle: white;
+$colorTitle: Black;
 $colorNav: white;
 $validate: rgb(3, 126, 3);
+$neutral: Black;
 $delete: rgb(205, 7, 3);
+
 /* =============================================================================================================================================
                                                                         GLOBAL
 ============================================================================================================================================= */
@@ -21,36 +23,132 @@ html {
 body {
   margin: 0;
   font-size: 1.6rem;
-  background: url("../images/tetris.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow: hidden;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Exo:100);
+/* Animations */
+@-webkit-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@-moz-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@-o-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@-webkit-keyframes bg-scrolling {
+  0% {
+    background-position: 50px 50px;
+  }
+}
+@-moz-keyframes bg-scrolling {
+  0% {
+    background-position: 50px 50px;
+  }
+}
+@-o-keyframes bg-scrolling {
+  0% {
+    background-position: 50px 50px;
+  }
+}
+@keyframes bg-scrolling {
+  0% {
+    background-position: 50px 50px;
+  }
+}
+/* Main styles */
+body {
+  color: #999;
+  font:
+    400 16px/1.5 exo,
+    ubuntu,
+    'segoe ui',
+    helvetica,
+    arial,
+    sans-serif;
+  text-align: center;
+  /* img size is 50x50 */
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC')
+    repeat 0 0;
+  -webkit-animation: bg-scrolling-reverse 0.92s infinite;
+  /* Safari 4+ */
+  -moz-animation: bg-scrolling-reverse 0.92s infinite;
+  /* Fx 5+ */
+  -o-animation: bg-scrolling-reverse 0.92s infinite;
+  /* Opera 12+ */
+  animation: bg-scrolling-reverse 0.92s infinite;
+  /* IE 10+ */
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+
+.app-body {
+  margin: 0;
+  font-size: 1.6rem;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 img {
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
-    -ms-interpolation-mode: bicubic;
-    /* lissage pour IE */
-    image-rendering: -webkit-optimize-contrast;
-    /* lissage pour Chrome au redimensionnement*/
-  }
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  -ms-interpolation-mode: bicubic;
+  /* lissage pour IE */
+  image-rendering: -webkit-optimize-contrast;
+  /* lissage pour Chrome au redimensionnement*/
+}
 
+h1 {
+  font-size: 5rem;
+  color: $colorTitle;
+}
+
+.header {
   h1 {
-    font-size: 5rem;
-    color: $colorTitle;
+    text-align: center;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding: 3rem 0;
   }
+}
 
-  .header {
-  
+  .logo-link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
     h1 {
       text-align: center;
       margin-block-start: 0;
       margin-block-end: 0;
       padding: 3rem 0;
     }
-    }
+  }
 
+.notFound {
+  text-align: center;
+}
 
 /* =============================================================================================================================================
                                                                 LOGIN/REGISTER
@@ -59,12 +157,12 @@ section.login,
 section.register {
   display: flex;
   justify-content: center;
-  padding-top: 10rem;
-  padding-bottom: 10rem;
+  padding-top: 15vh;
+  padding-bottom: 15vh;
 
   form {
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 2rem;
+    padding: 2vh;
     display: flex;
     flex-direction: column;
     min-width: 350px;
@@ -81,6 +179,11 @@ section.register {
       .invalid {
         color: red;
       }
+    }
+
+    .errorMessage {
+      color: $delete;
+      font-weight: 700;
     }
   }
 
@@ -100,6 +203,7 @@ section.register {
     }
   }
 }
+
 /* =============================================================================================================================================
                                                                 ACCOUNT
 ============================================================================================================================================= */
@@ -108,6 +212,7 @@ section.account {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 10vh;
 
   .accountData {
     flex-wrap: wrap;
@@ -116,9 +221,11 @@ section.account {
     padding: 20px;
     border-radius: 5px;
   }
+
   .titleAccount {
     color: black;
   }
+
   div {
     align-items: inherit;
 
@@ -139,7 +246,14 @@ section.account {
     }
   }
 }
-  
+
+/* =============================================================================================================================================
+                                                                TETRIS
+============================================================================================================================================= */
+
+section.tetrisview {
+  color: red;
+}
 
 /*__________________________________ Button ________________________________*/
 .custom-btn {
@@ -147,7 +261,7 @@ section.account {
   height: 40px;
   padding: 10px 25px;
   border: 2px solid #000;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 500;
   background: transparent;
   cursor: pointer;
@@ -155,6 +269,7 @@ section.account {
   position: relative;
   display: inline-block;
 }
+
 .btn {
   background: #000;
   color: #fff;
@@ -164,14 +279,19 @@ section.account {
   align-self: center;
   padding: 0 2em;
 }
+
 .btn:hover {
   background: white;
-  box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
-    7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+  box-shadow:
+    -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
 }
+
 .btn:before,
 .btn:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   right: 0;
@@ -179,21 +299,32 @@ section.account {
   width: 0;
   transition: 400ms ease all;
 }
+
 .btn:after {
   right: inherit;
   top: inherit;
   left: 0;
   bottom: 0;
 }
+
 .btn:hover:before,
 .btn:hover:after {
   width: 100%;
   transition: 800ms ease all;
 }
+
 .btn-green:hover {
   color: $validate;
 }
+
 .btn-green:before,
 .btn-green:after {
   background: $validate;
+}
+.btn-black:hover {
+  color: $neutral;
+}
+.btn-black:before,
+.btn-black:after {
+  background: $neutral;
 }
