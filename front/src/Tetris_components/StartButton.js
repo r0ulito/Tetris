@@ -1,8 +1,9 @@
-import React from 'react';
-import { StyledStartButton } from '../styles/StyledStartButton';
+import React from "react";
 
 const StartButton = ({ callback }) => (
-  <StyledStartButton onClick={callback}>Start Game</StyledStartButton>
+  <button onClick={callback} className="custom-btn btn btn-black">
+    Start Game
+  </button>
 );
 
 export default StartButton;

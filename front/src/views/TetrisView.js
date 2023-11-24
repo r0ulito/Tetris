@@ -1,12 +1,12 @@
-import React from 'react';
-import Tetris from '../Tetris_components/Tetris';
+import React from "react";
+import Tetris from "../Tetris_components/Tetris";
 import RequireAuth from "../lib/auth";
 
 function TetrisView() {
-  RequireAuth()
+  RequireAuth();
 
   return (
-    <div className='App'>
+    <div className="tetrisview">
       <Tetris />
     </div>
   );
