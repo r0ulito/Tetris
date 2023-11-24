@@ -1,13 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { storeTokenInLocalStorage } from '../lib/common';
+import { storeTokenInLocalStorage, getTokenFromLocalStorage } from '../lib/common';
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState("");
+    const token = getTokenFromLocalStorage();
+
+    const redirect = () => {
+        if (token) {
+            return navigate(`/account`)
+        }
+    }
+
+    useEffect(() => {
+        redirect()
+    }, []);
 
     const userLogin = async (e) => {
         e.preventDefault();
@@ -25,6 +36,7 @@ const LoginPage = () => {
             });
             if (response) {
                 storeTokenInLocalStorage(response.data);
+                return navigate(`/account`)
             }
         }
         catch (err) {
