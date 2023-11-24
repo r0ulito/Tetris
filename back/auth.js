@@ -37,7 +37,7 @@ router.post("/signup", async (ctx) => {
       errorMessage += "E-mail déjà utilisé.";
     }
 
-    ctx.status = 300;
+    ctx.status = 400;
     ctx.body = { message: errorMessage };
     return;
   }
