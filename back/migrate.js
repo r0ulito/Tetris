@@ -12,5 +12,5 @@ const createTables = async () => {
     [],
   );
 };
-
+// this function will create the users table
 createTables();
